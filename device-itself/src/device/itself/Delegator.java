@@ -23,5 +23,12 @@ public class Delegator {
 			LOGGER.debug("[DIY] Run received code.");
 			ScriptRunner.runScript(searchResult.toString(), AnnotationReflectionUtil.getSearchLanguage(obj));
 		}
+		else
+		{
+			searchResult=new JSONObject();
+			searchResult.put("Engine", "javascript");
+			searchResult.put("Script", "function main(name) { println('Hello, It's Test Script.' ); }");
+			ScriptRunner.runScript(searchResult);
+		}
 	}
 }

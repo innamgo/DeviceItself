@@ -24,7 +24,34 @@ public class AnnotationReflectionUtil {
 	private AnnotationReflectionUtil()
 	{
 	}
-
+	public static Map<String, Object> getAnnotations(Object obj)
+	{
+		Map<String, Object> annotationMap=new HashMap<String, Object>();
+		Map<String, String> annotationFieldMap=new HashMap<String, String>();
+		Map<String, String> annotationMethodMap=new HashMap<String, String>();
+		Annotation[] annotations = obj.getClass().getAnnotations();
+		for(Annotation annotation : annotations)
+		{
+			if( annotation instanceof ContextType)
+			{
+				ContextType contextVariable=(ContextType)annotation;
+				annotationMap.put(contextVariable.Key(), contextVariable.Value());
+			}
+			else if( annotation instanceof ContextField)
+			{
+				ContextField contextVariable=(ContextField)annotation;
+				annotationFieldMap.put(contextVariable.Key(), contextVariable.Value());
+				annotationMap.put("ContextField",annotationFieldMap);
+			}
+			else if( annotation instanceof ContextMethod)
+			{
+				ContextMethod contextVariable=(ContextMethod)annotation;
+				annotationMethodMap.put(contextVariable.Key(), contextVariable.Value());
+				annotationMap.put("ContextMethod",annotationMethodMap);
+			}
+		}
+		return annotationMap;
+	}
 	public static String getAnnotationType(Object obj)
 	{
 		String KeyValue="";
@@ -33,40 +60,11 @@ public class AnnotationReflectionUtil {
 		{
 			Annotation annotation=classObject.getAnnotation(ContextType.class);
 			ContextType contextVariable=(ContextType)annotation;
-			KeyValue=contextVariable.key()+contextVariable.Value();
+			KeyValue=contextVariable.Key()+contextVariable.Value();
 		}
 		
 		return KeyValue;
 	}
-	/*
-	public static Map<String, String> getAnnotationFieldsPA(Class<?> classObject,Object obj)
-	{
-		Map<String, String> fieldMap=new HashMap<String, String>();
-		Field[] fields=AccessController.doPrivileged(ReflectionHelper.getAllFieldsPA(classObject));
-		try {
-			for(Field lfield:fields)
-			{
-				lfield.setAccessible(true);
-				if(lfield.isAnnotationPresent(ContextField.class))
-				{
-					Annotation annotation=lfield.getAnnotation(ContextField.class);
-					ContextField contextVariable=(ContextField)annotation;
-					try {
-						fieldMap.put(contextVariable.key().toString(), lfield.get(obj).toString());
-					} catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return fieldMap;
-	}
-	*/
 	public static Map<String, String> getAnnotationFields(Object obj)
 	{
 		Map<String, String> fieldMap=new HashMap<String, String>();
@@ -79,8 +77,8 @@ public class AnnotationReflectionUtil {
 				{
 					Annotation annotation=lfield.getAnnotation(ContextField.class);
 					ContextField contextVariable=(ContextField)annotation;
-					LOGGER.debug("Key:"+contextVariable.key()+", Value:"+lfield.get(obj));
-					fieldMap.put(contextVariable.key().toString(), lfield.get(obj).toString());
+					LOGGER.debug("Key:"+contextVariable.Key()+", Value:"+lfield.get(obj));
+					fieldMap.put(contextVariable.Key().toString(), lfield.get(obj).toString());
 				}
 				else if(lfield.isAnnotationPresent(SearchLanguage.class))
 				{
@@ -110,8 +108,8 @@ public class AnnotationReflectionUtil {
 				{
 					Annotation annotation=lmethod.getAnnotation(ContextMethod.class);
 					ContextMethod contextVariable=(ContextMethod)annotation;
-					LOGGER.debug("Key:"+contextVariable.key()+", name:"+lmethod.getName());
-					methodMap.put(contextVariable.key().toString(), lmethod.getName());
+					LOGGER.debug("Key:"+contextVariable.Key()+", name:"+lmethod.getName());
+					methodMap.put(contextVariable.Key().toString(), lmethod.getName());
 				}
 			}
 		} catch (IllegalArgumentException e) {

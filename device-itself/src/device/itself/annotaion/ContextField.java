@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value= {ElementType.FIELD,ElementType.LOCAL_VARIABLE})
 public @interface ContextField {
-	String key() default "";
+	String Key() default "";
 	String Value() default "";
 }

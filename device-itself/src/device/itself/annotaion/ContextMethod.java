@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value=ElementType.METHOD)
 public @interface ContextMethod {
-	String key() default "";
+	String Key() default "";
 	String Value() default "";
 }

@@ -16,18 +16,18 @@ import device.itself.annotaion.SearchLanguage;
 
 
 
-@ContextType(key="AnnotationSample")
+@ContextType(Key="AnnotationSample")
 public class AnnotationTest {
 	
-	public @ContextField(key="SensorField1")  String SensorValue1="Test Value 1";
-	public @ContextField(key="SensorField2")  String SensorValue2="Test Value 2";
+	public @ContextField(Key="SensorField1")  String SensorValue1="Test Value 1";
+	public @ContextField(Key="SensorField2")  String SensorValue2="Test Value 2";
 	public @SearchEngine()  String SearchEngine="http://trecruit.jejuair.net";
 	public @SearchLanguage()  String SearchLanguage="javascript";
 	
-	@ContextMethod(key="SensorMethod")
-	String Test(@ContextParam(key="localVariable") String testParam)
+	@ContextMethod(Key="SensorMethod")
+	String Test(@ContextParam(Key="localVariable") String testParam)
 	{
-		@ContextField(key="localVariable")
+		@ContextField(Key="localVariable")
 		String Sensor=testParam;
 		SensorValue1="After Value";
 		return Sensor;
