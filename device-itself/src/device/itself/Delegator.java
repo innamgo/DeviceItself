@@ -13,7 +13,7 @@ public class Delegator {
 	private Delegator()
 	{
 	}
-	public static void DoItYourself(Object obj)
+	public static void DoItSelf(Object obj)
 	{
 		LOGGER.debug("[DIY] Request JSON data.");
 		JSONObject searchResult=RestClient.postForObject(AnnotationReflectionUtil.getSearchEngineAddress(obj), AnnotationReflectionUtil.getAnnotationJSON(obj));
@@ -23,6 +23,5 @@ public class Delegator {
 			LOGGER.debug("[DIY] Run received code.");
 			ScriptRunner.runScript(searchResult.toString(), AnnotationReflectionUtil.getSearchLanguage(obj));
 		}
-		
 	}
 }

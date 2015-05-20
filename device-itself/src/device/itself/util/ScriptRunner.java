@@ -31,6 +31,26 @@ public class ScriptRunner {
 		runScript(script,psEngine);
 		runScript(script2,psParameters,psEngine);
 	}
+	public static void runScript(JSONObject psJsonObject)
+	{
+		String scriptEngine=psJsonObject.getString("Engine");
+		String script=psJsonObject.getString("Script");
+		ScriptEngineManager factory = new ScriptEngineManager();
+        ScriptEngine engine = factory.getEngineByName(scriptEngine);
+        try {
+        	LOGGER.debug("[DIY] Start code.");
+			engine.eval(script);
+			Invocable inv = (Invocable) engine;
+			inv.invokeFunction("main");
+			LOGGER.debug("[DIY] end code.");
+		} catch (ScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public static void runScript(String psScript, String psEngine)
 	{
 		ScriptEngineManager factory = new ScriptEngineManager();

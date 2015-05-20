@@ -19,8 +19,8 @@ import device.itself.annotaion.SearchLanguage;
 @ContextType(key="AnnotationSample")
 public class AnnotationTest {
 	
-	public @ContextField(key="SensorField1")  String SensorValue1="SensorValue1";
-	public @ContextField(key="SensorField2")  String SensorValue2="SensorValue2";
+	public @ContextField(key="SensorField1")  String SensorValue1="Test Value 1";
+	public @ContextField(key="SensorField2")  String SensorValue2="Test Value 2";
 	public @SearchEngine()  String SearchEngine="http://trecruit.jejuair.net";
 	public @SearchLanguage()  String SearchLanguage="javascript";
 	
@@ -41,14 +41,14 @@ public class AnnotationTest {
 		else if(testValue.equals("b"))
 			System.out.println("b");
 		else
-			Delegator.DoItYourself(test);
+			Delegator.DoItSelf(test);
 		
 		try {
 			throw new Exception();
 		}catch(Exception e)
 		{
 			e.printStackTrace();
-			Delegator.DoItYourself(test);
+			Delegator.DoItSelf(test);
 		}
 
 	}
