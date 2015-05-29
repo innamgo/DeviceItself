@@ -12,6 +12,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import device.itself.annotaion.ContextMethod;
+import device.itself.annotaion.ContextParam;
 import device.itself.annotaion.ContextType;
 import device.itself.annotaion.ContextField;
 import device.itself.annotaion.SearchEngine;
@@ -42,6 +43,20 @@ public class AnnotationReflectionUtil {
 				ContextField contextVariable=(ContextField)annotation;
 				annotationFieldMap.put(contextVariable.Key(), contextVariable.Value());
 				annotationMap.put("ContextField",annotationFieldMap);
+			}
+			else if( annotation instanceof ContextParam)
+			{
+				ContextParam contextVariable=(ContextParam)annotation;
+				annotationFieldMap.put(contextVariable.Key(), contextVariable.Value());
+				annotationMap.put("ContextParam",annotationFieldMap);
+			}
+			else if( annotation instanceof SearchEngine)
+			{
+				annotationMap.put("SearchEngine",getSearchEngineAddress(obj));
+			}
+			else if( annotation instanceof SearchLanguage)
+			{
+				annotationMap.put("SearchLanguage",getSearchLanguage(obj));
 			}
 			else if( annotation instanceof ContextMethod)
 			{

@@ -21,7 +21,7 @@ public class AnnotationTest {
 	
 	public @ContextField(Key="SensorField1")  String SensorValue1="Test Value 1";
 	public @ContextField(Key="SensorField2")  String SensorValue2="Test Value 2";
-	public @SearchEngine()  String SearchEngine="http://trecruit.jejuair.net";
+	public @SearchEngine()  String SearchEngine="http://www.daum.net";
 	public @SearchLanguage()  String SearchLanguage="javascript";
 	
 	@ContextMethod(Key="SensorMethod")
